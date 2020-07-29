@@ -7,10 +7,10 @@ namespace App;
 abstract class Table{
     private static function getPDO(){
 
-        $host = "mysql";
-        $dbname = "animal";
-        $username = "root";
-        $password = "qwerty";
+        $host = "";
+        $dbname = "";
+        $username = "";
+        $password = "";
 
         try {
             $pdo = new \PDO("mysql:host={$host};dbname={$dbname}", $username, $password);
