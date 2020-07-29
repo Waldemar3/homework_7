@@ -7,10 +7,10 @@ namespace App;
 abstract class Table{
     private static function getPDO(){
 
-        $host = "";
-        $dbname = "";
-        $username = "";
-        $password = "";
+        $host = "mysql";
+        $dbname = "animal";
+        $username = "root";
+        $password = "qwerty";
 
         try {
             $pdo = new \PDO("mysql:host={$host};dbname={$dbname}", $username, $password);
@@ -92,10 +92,10 @@ abstract class Table{
             $maskInsert = implode(', ', array_fill(0, count(get_object_vars($this)), '?'));
 
             $sql['sql'] = "insert into {$table} ({$fieldInsert}) values ({$maskInsert})";
-            $sql['values'] = explode(', ', implode(', ', get_object_vars($this)));
+            $sql['values'] = array_values(get_object_vars($this));
         }else{
             $maskUpdate = implode(' = ?, ', array_keys(get_object_vars($this))) . ' = ?';
-            $valuesUpdate = explode(', ', implode(', ', get_object_vars($this)));
+            $valuesUpdate = array_values(get_object_vars($this));
             array_push($valuesUpdate, $this->id);
 
             $sql['sql'] = "update {$table} set {$maskUpdate} where id = ?";
